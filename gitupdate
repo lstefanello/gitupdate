@@ -22,14 +22,12 @@ else
 		echo -e "\n"	
 
 		for (( i=0;i<dir_number;i++ )); do 
-			cd ${dir_array[i]}
 			echo -e "\n"
 			echo "${dir_array[i]}"
 			echo "####################"
 			echo -e "\n"
-			git pull 			
-			make
-			cd ..
+			git -C ${dir_array[i]} pull
+			make -C ${dir_array[i]}
 		done
 	else
 		echo "Directory doesn't exist"
