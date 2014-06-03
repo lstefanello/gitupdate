@@ -1,1 +1,1 @@
-Gitupdater goes into the directory you keep your cloned repositories into and automatically goes through each one, running git pull to pull new code and then compiling it.
+Gitupdate goes into the directory you keep your cloned git repositories in. It goes through each one of them, pulls, and compiles code for you, since manually updating several git repositories is time consuming and irritating.
