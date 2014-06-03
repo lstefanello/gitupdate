@@ -9,6 +9,9 @@ else
 		dir_number=$(expr $dir_number - 1)
 		echo "$dir_number directories to check."
 		dir_array[$dir_number]=0
+		update_array[$dir_number]=0
+		update_tally=0
+		gitmessage="Already up-to-date."
 		file_array=tmp.txt
 		ls -d */ -format -1 > $file_array
 
@@ -19,16 +22,28 @@ else
 		
 		echo -e "\n"
 		echo "Updating..."
-		echo -e "\n"	
 
 		for (( i=0;i<dir_number;i++ )); do 
 			echo -e "\n"
 			echo "${dir_array[i]}"
 			echo "####################"
 			echo -e "\n"
-			git -C ${dir_array[i]} pull
+			change_check=$(git -C ${dir_array[i]} pull)
 			make -C ${dir_array[i]}
+			if [ "$change_check" = "$gitmessage" ]; then
+				update_array[i]="unchanged"
+			else
+				update_array[i]="changed"
+				((update_tally+=1))
+			fi 
 		done
+		unchanged_talley=$(expr $dir_number - $update_tally)
+		echo -e "\n"
+		echo "Done."
+		echo "Out of $dir_number repositories, $update_tally were updated. $unchanged_talley were left alone."
+		for (( i=0;i<dir_number;i++ )); do 
+			echo "${dir_array[i]} [${update_array[i]}]"
+		done	
 	else
 		echo "Directory doesn't exist"
 	fi
