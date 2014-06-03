@@ -40,7 +40,7 @@ else
 		unchanged_talley=$(expr $dir_number - $update_tally)
 		echo -e "\n"
 		echo "Done."
-		echo "Out of $dir_number repositories, $update_tally were updated. $unchanged_talley were left alone."
+		echo "Out of $dir_number repositories, $update_tally were updated and $unchanged_talley were left alone."
 		for (( i=0;i<dir_number;i++ )); do 
 			echo "${dir_array[i]} [${update_array[i]}]"
 		done	
