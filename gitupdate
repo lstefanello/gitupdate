@@ -44,7 +44,7 @@ else
 		for (( i=0;i<dir_number;i++ )); do 
 			echo "${dir_array[i]} [${update_array[i]}]"
 		done	
-		rm -r tmp.txt
+		rm  tmp.txt
 	else
 		echo "Directory doesn't exist"
 	fi
